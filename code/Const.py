@@ -1,5 +1,6 @@
 # C
 C_WHITE = (255, 255, 255)
+C_OPTION = (255, 253, 85)
 
 # M
 MENU_OPTION = ('New Game 1P',
