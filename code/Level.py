@@ -1,10 +1,11 @@
+import random
 import sys
 
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import C_WHITE, WIN_WIDTH, WIN_HEIGHT
+from code.Const import C_WHITE, WIN_WIDTH, WIN_HEIGHT, ENEMY_EVENT
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -12,13 +13,14 @@ from code.EntityFactory import EntityFactory
 class Level:
 
     def __init__(self, window, name, game_mode):
+        self.timeout = 35000 # 35 segundos
         self.window = window
         self.name = name
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('LVL1-'))
         self.entity_list.append(EntityFactory.get_entity('Player'))
-        self.timeout = 35000 # 35 segundos
+        pygame.time.set_timer(ENEMY_EVENT, 2000)
 
 
     def run (self):
@@ -32,6 +34,9 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == ENEMY_EVENT:
+                    choice = random.choices(['Enemy1', 'Enemy2'], weights = [60, 40], k=1)[0]
+                    self.entity_list.append(EntityFactory.get_entity(choice))
 
             # Tempo restante de jogo
             self.level_text(25, f' Tempo restante: {self.timeout / 1000: .1f}s', C_WHITE, (WIN_WIDTH/2, 15))

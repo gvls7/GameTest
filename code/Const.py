@@ -1,11 +1,17 @@
 # C
+import pygame
+
 C_WHITE = (255, 255, 255)
 C_OPTION = (255, 253, 85)
 
+# E
+ENEMY_EVENT = pygame.USEREVENT + 1
+ENEMY_SPEED = {'Enemy1' : 9,
+               'Enemy2' : 6,
+               }
+
 # M
-MENU_OPTION = ('New Game 1P',
-               'New Game 2P - Cooperative',
-               'New Game 2P - Competitive',
+MENU_OPTION = ('New Game',
                'Score',
                'Exit')
 
