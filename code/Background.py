@@ -6,6 +6,6 @@ class Background(Entity):
         super().__init__(name, position)
 
     def move(self, ):
-        self.rect.centerx -= 2
+        self.rect.centerx -= 5
         if self.rect.right <= 0:
             self.rect.left = 2400
