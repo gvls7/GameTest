@@ -19,9 +19,9 @@ ENTITY_HEALTH = {
     'LVL1-1': 999,
     'LVL1-2': 999,
     'LVL1-3': 999,
-    'Player': 100,
-    'Enemy1': 15,
-    'Enemy2': 15,
+    'Player': 300,
+    'Enemy1': 60,
+    'Enemy2': 90,
     'PlayerShot': 1,
     'Enemy1Shot': 1,
     'Enemy2Shot': 1,
@@ -32,6 +32,20 @@ ENTITY_SHOT_DELAY = {
     'Enemy1': 30,
     'Enemy2': 60,
 }
+
+ENTITY_DAMAGE = {
+    'LVL1-0': 0,
+    'LVL1-1': 0,
+    'LVL1-2': 0,
+    'LVL1-3': 0,
+    'Player': 1,
+    'PlayerShot': 25,
+    'Enemy1': 5,
+    'Enemy2': 6,
+    'Enemy1Shot': 20,
+    'Enemy2Shot': 35,
+}
+
 # M
 MENU_OPTION = ('New Game',
                'Score',
