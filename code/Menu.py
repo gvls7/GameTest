@@ -5,7 +5,7 @@ import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import WIN_WIDTH, MENU_OPTION, C_WHITE, C_OPTION
+from code.Const import WIN_WIDTH, MENU_OPTION, C_WHITE, C_OPTION, WIN_HEIGHT
 
 
 class Menu:
@@ -21,8 +21,8 @@ class Menu:
         while True:
             # DRAW IMAGES
             self.window.blit(source=self.surf, dest=self.rect)
-            self.menu_text(120, "STARSHIP", C_WHITE, ((WIN_WIDTH / 2), 70))
-            self.menu_text(110, "WAR", C_WHITE, ((WIN_WIDTH / 2), 160))
+            self.menu_text(18, "Move: <, >, ^, v", C_WHITE, ((WIN_WIDTH / 2), WIN_HEIGHT - 45))
+            self.menu_text(18, "Shoot: Left CTRL", C_WHITE, ((WIN_WIDTH / 2), WIN_HEIGHT - 25))
 
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:

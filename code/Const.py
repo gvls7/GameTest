@@ -46,6 +46,19 @@ ENTITY_DAMAGE = {
     'Enemy2Shot': 35,
 }
 
+ENTITY_SCORE = {
+    'LVL1-0': 0,
+    'LVL1-1': 0,
+    'LVL1-2': 0,
+    'LVL1-3': 0,
+    'Player': 0,
+    'PlayerShot': 0,
+    'Enemy1': 100,
+    'Enemy2': 150,
+    'Enemy1Shot': 0,
+    'Enemy2Shot': 0,
+}
+
 # M
 MENU_OPTION = ('New Game',
                'Score',

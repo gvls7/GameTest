@@ -37,6 +37,8 @@ class Level:
                     shoot = ent.shoot()
                     if shoot is not None:
                         self.entity_list.append(shoot)
+                if ent.name == 'Player':
+                    self.level_text(15, f' Health: {ent.health} | Score: {ent.score}', C_WHITE, (50, 15))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -44,6 +46,7 @@ class Level:
                 if event.type == ENEMY_EVENT:
                     choice = random.choices(['Enemy1', 'Enemy2'], weights = [60, 40], k=1)[0]
                     self.entity_list.append(EntityFactory.get_entity(choice))
+
 
             # Tempo restante de jogo
             self.level_text(25, f' Tempo restante: {self.timeout / 1000: .1f}s', C_WHITE, (WIN_WIDTH/2, 15))
