@@ -5,7 +5,7 @@ import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import C_WHITE, WIN_WIDTH, WIN_HEIGHT, ENEMY_EVENT
+from code.Const import C_WHITE, WIN_WIDTH, WIN_HEIGHT, ENEMY_EVENT, EVENT_TIMEOUT
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
@@ -15,18 +15,21 @@ from code.Player import Player
 
 class Level:
 
-    def __init__(self, window, name, game_mode):
-        self.timeout = 35000 # 35 segundos
+    def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
+        self.timeout = 40000
         self.window = window
         self.name = name
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('LVL1-'))
-        self.entity_list.append(EntityFactory.get_entity('Player'))
+        player = EntityFactory.get_entity('Player')
+        player.score = player_score[0]
+        self.entity_list.append(player)
         pygame.time.set_timer(ENEMY_EVENT, 2000)
+        pygame.time.set_timer(EVENT_TIMEOUT, 100)
 
 
-    def run (self):
+    def run (self, player_score: list[int]):
         clock = pygame.time.Clock()
         while True:
             clock.tick(60)
@@ -38,7 +41,7 @@ class Level:
                     if shoot is not None:
                         self.entity_list.append(shoot)
                 if ent.name == 'Player':
-                    self.level_text(15, f' Health: {ent.health} | Score: {ent.score}', C_WHITE, (50, 15))
+                    self.level_text(15, f' Health: {ent.health} | Score: {ent.score}', C_WHITE, (90, 15))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -46,6 +49,21 @@ class Level:
                 if event.type == ENEMY_EVENT:
                     choice = random.choices(['Enemy1', 'Enemy2'], weights = [60, 40], k=1)[0]
                     self.entity_list.append(EntityFactory.get_entity(choice))
+                if event.type == EVENT_TIMEOUT:
+                    self.timeout -= 100
+                    if self.timeout == 0:
+                        for ent in self.entity_list:
+                            if isinstance(ent, Player) and ent.name == 'Player':
+                                player_score[0] = ent.score
+                        return True
+
+                found_player = False
+                for ent in self.entity_list:
+                    if isinstance(ent, Player):
+                        found_player = True
+
+                if not found_player:
+                    return False
 
 
             # Tempo restante de jogo

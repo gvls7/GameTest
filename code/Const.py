@@ -6,10 +6,11 @@ C_OPTION = (255, 253, 85)
 
 # E
 ENEMY_EVENT = pygame.USEREVENT + 1
+EVENT_TIMEOUT = pygame.USEREVENT + 2
 ENTITY_SPEED = {'Enemy1': 6,
                 'Enemy2': 4,
                 'Player': 7,
-                'PlayerShot': 4,
+                'PlayerShot': 7,
                 'Enemy1Shot': 9,
                 'Enemy2Shot': 8,
                }
@@ -28,7 +29,7 @@ ENTITY_HEALTH = {
 }
 
 ENTITY_SHOT_DELAY = {
-    'Player': 20,
+    'Player': 15,
     'Enemy1': 30,
     'Enemy2': 60,
 }
