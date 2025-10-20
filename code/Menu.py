@@ -19,7 +19,6 @@ class Menu:
         pygame.mixer_music.load('./asset/Menu.wav')
         pygame.mixer_music.play(-1)
         while True:
-            # DRAW IMAGES
             self.window.blit(source=self.surf, dest=self.rect)
             self.menu_text(18, "Move: <, >, ^, v", C_WHITE, ((WIN_WIDTH / 2), WIN_HEIGHT - 45))
             self.menu_text(18, "Shoot: Left CTRL", C_WHITE, ((WIN_WIDTH / 2), WIN_HEIGHT - 25))
@@ -31,7 +30,6 @@ class Menu:
                     self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 250 + 26 * i))
             pygame.display.flip()
 
-            # Check for all events
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_DOWN:  # DOWN KEY

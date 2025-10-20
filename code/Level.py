@@ -16,7 +16,7 @@ from code.Player import Player
 class Level:
 
     def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
-        self.timeout = 40000
+        self.timeout = 60000
         self.window = window
         self.name = name
         self.game_mode = game_mode
@@ -25,7 +25,7 @@ class Level:
         player = EntityFactory.get_entity('Player')
         player.score = player_score[0]
         self.entity_list.append(player)
-        pygame.time.set_timer(ENEMY_EVENT, 2000)
+        pygame.time.set_timer(ENEMY_EVENT, 1800)
         pygame.time.set_timer(EVENT_TIMEOUT, 100)
 
 
@@ -55,6 +55,7 @@ class Level:
                         for ent in self.entity_list:
                             if isinstance(ent, Player) and ent.name == 'Player':
                                 player_score[0] = ent.score
+                        self.show_win_screen()
                         return True
 
                 found_player = False
@@ -63,6 +64,7 @@ class Level:
                         found_player = True
 
                 if not found_player:
+                    self.show_lose_screen()
                     return False
 
 
@@ -79,3 +81,34 @@ class Level:
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_pos)
         self.window.blit(source=text_surf, dest=text_rect)
+
+    def show_win_screen(self):
+        while True:
+            self.window.fill((0, 0, 0))
+            self.level_text(60, "You Win!!", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50))
+            self.level_text(30, "Press ENTER to continue", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50))
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return
+            pygame.display.flip()
+
+
+    def show_lose_screen(self):
+        while True:
+            self.window.fill((0, 0, 0))
+            self.level_text(60, "You Lose", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50))
+            self.level_text(30, "Press ENTER to return to menu", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50))
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return
+            pygame.display.flip()
