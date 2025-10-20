@@ -25,7 +25,7 @@ class Level:
         player = EntityFactory.get_entity('Player')
         player.score = player_score[0]
         self.entity_list.append(player)
-        pygame.time.set_timer(ENEMY_EVENT, 1800)
+        pygame.time.set_timer(ENEMY_EVENT, 1200)
         pygame.time.set_timer(EVENT_TIMEOUT, 100)
 
 
